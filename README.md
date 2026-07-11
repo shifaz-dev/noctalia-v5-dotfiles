@@ -110,8 +110,3 @@ services, the full `noctalia msg` cheat-sheet, plugins, Hyprland integration).
 Open [`docs/noctalia-v5-reference.html`](docs/noctalia-v5-reference.html) in a
 browser for the themed version.
 
-## Credits
-
-- [Noctalia](https://noctalia.dev) — the shell · [docs.noctalia.dev/v5](https://docs.noctalia.dev/v5)
-- [Hyprland](https://hyprland.org) · [CachyOS](https://cachyos.org)
-- Wallpapers are digital art collected from the web, included for showcase; rights belong to their respective artists.

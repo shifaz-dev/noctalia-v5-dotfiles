@@ -1,0 +1,242 @@
+[bar.default]
+background_opacity = 0.69999998435378075
+border = "on_surface_variant"
+border_width = 0.5
+capsule = true
+capsule_fill = "error"
+capsule_opacity = 0.099999997764825821
+capsule_radius = 12
+capsule_thickness = 0.74999998696148396
+center = [ "audio_visualizer", "media", "clock", "cat" ]
+color = "tertiary"
+contact_shadow = true
+end = [
+    "tray",
+    "notifications",
+    "clipboard",
+    "network",
+    "bluetooth",
+    "volume",
+    "brightness",
+    "battery",
+    "control-center",
+    "session"
+]
+icon_color = "primary"
+panel_overlap = 0
+start = [ "launcher", "wallpaper", "workspaces", "cpu", "ram", "network_rx", "network_tx" ]
+thickness = 30
+
+[calendar]
+enabled = true
+
+[control_center]
+sidebar = "full"
+sidebar_section = "full"
+width = 800
+
+[desktop_widgets]
+schema_version = 2
+widget_order = [
+    "desktop-widget-0000000000000001",
+    "desktop-widget-0000000000000002",
+    "desktop-widget-0000000000000003",
+    "desktop-widget-0000000000000005"
+]
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1280.0
+    cy = 196.5
+    output = "DP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        background_opacity = 0.38
+        background_radius = 24
+        center_text = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000002]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1280.0
+    cy = 720.0
+    output = "DP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000002.settings]
+        clock_style = "digital"
+        format = ""
+
+    [desktop_widgets.widget.desktop-widget-0000000000000003]
+    box_height = 0.0
+    box_width = 0.0
+    cx = 1280.0
+    cy = 650.0
+    output = "DP-1"
+    rotation = 0.0
+    type = "audio_visualizer"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000003.settings]
+        background_opacity = 0.47000000000000003
+        bands = 32
+        show_when_idle = true
+
+    [desktop_widgets.widget.desktop-widget-0000000000000005]
+    box_height = 256.0
+    box_width = 512.0
+    cx = 1280.0
+    cy = 400.0
+    output = "DP-1"
+    rotation = 0.0
+    type = "weather"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
+        background_opacity = 0.39000000000000001
+        font_family = "Bitstream Vera Serif"
+        forecast_days = 6
+        show_forecast = true
+
+[dock]
+auto_hide = true
+background_opacity = 0.45999998971819878
+enabled = true
+pinned = [ "org.kde.dolphin", "vivaldi-stable", "org.telegram.desktop", "steam" ]
+reserve_space = false
+show_dots = true
+
+[location]
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = [ "lockscreen-login-box@DP-1", "lockscreen-login-box@HDMI-A-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 1280.0
+    cy = 1321.0
+    output = "DP-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 960.0
+    cy = 961.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
+[plugins]
+enabled = []
+
+[shell]
+avatar_path = "/home/shifaz/Pictures/logo/Profile.png"
+polkit_agent = true
+screen_time_enabled = true
+
+    [shell.panel]
+    control_center_placement = "floating"
+    floating_offset = 6
+    session_placement = "floating"
+    session_position = "center"
+    transparency_mode = "glass"
+
+    [shell.screenshot]
+    confirm_region = false
+    copy_to_clipboard = false
+    directory = "/home/shifaz/Pictures/Screenshots"
+    pipe_command = "satty -f - -o \"$NOCTALIA_SCREENSHOT_PATH\" --copy-command wl-copy --early-exit"
+    pipe_to_command = true
+    save_to_file = false
+
+[theme]
+builtin = "Tokyo-Night"
+community_palette = "Ayu Blue"
+mode = "dark"
+source = "community"
+wallpaper_scheme = "m3-content"
+
+    [theme.templates]
+    builtin_ids = [ "hyprland" ]
+    community_ids = [ "telegram", "snappy-switcher" ]
+
+[wallpaper]
+directory = "/home/shifaz/Pictures/Wallpaper"
+
+    [wallpaper.default]
+    path = "/home/shifaz/Pictures/Wallpaper/forest-deer.jpg"
+
+    [wallpaper.last]
+    path = "/home/shifaz/Pictures/Wallpaper/forest-deer.jpg"
+
+    [wallpaper.monitors.DP-1]
+    path = "/home/shifaz/Pictures/Wallpaper/forest-deer.jpg"
+
+    [wallpaper.monitors.HDMI-A-1]
+    path = "/home/shifaz/Pictures/Wallpaper/forest-deer.jpg"
+
+[widget.audio_visualizer]
+color = "error"
+
+[widget.cat]
+audio_spectrum = true
+capsule = true
+capsule_fill = "on_surface"
+capsule_foreground = "tertiary"
+capsule_padding = 17
+rave_mode = true
+tappy_mode = true
+type = "noctalia/bongocat:cat"
+
+[widget.clock]
+color = "secondary"
+enabled = true
+format = " %-I:%M %P %A %-d %b"
+scale = 1.2
+
+[widget.workspaces]
+display = "name"
+empty_color = "on_surface"
+focused_color = "error"
+focused_output_only = true
+max_label_chars = 5

@@ -1,0 +1,572 @@
+<title>Noctalia v5 Reference</title>
+<style>
+  :root {
+    /* Peche palette — dark (default) */
+    --bg: #0e1214;
+    --surface: #141b1d;
+    --surface-2: #192024;
+    --outline: #212b30;
+    --outline-soft: #1a2226;
+    --text: #aebcc4;
+    --text-strong: #dbe2e6;
+    --muted: #6f818a;
+    --primary: #9dd2c0;   /* mint */
+    --secondary: #e8b8a8; /* peach */
+    --blue: #a7cce1;
+    --amber: #f0c896;
+    --code-bg: #0a0e0f;
+    --shadow: 0 1px 0 rgba(0,0,0,.4), 0 8px 30px rgba(0,0,0,.35);
+    --radius: 12px;
+    --mono: ui-monospace, "JetBrains Mono", "Cascadia Code", "SF Mono", Menlo, monospace;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #e8eff2;
+      --surface: #f4f8fa;
+      --surface-2: #dfe8ec;
+      --outline: #c2cfd6;
+      --outline-soft: #d3dde1;
+      --text: #435860;
+      --text-strong: #26363c;
+      --muted: #738a92;
+      --primary: #3f8f78;
+      --secondary: #c07a58;
+      --blue: #4f88a6;
+      --amber: #a97b32;
+      --code-bg: #dde7eb;
+      --shadow: 0 1px 0 rgba(255,255,255,.5), 0 8px 26px rgba(60,80,90,.14);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e1214; --surface: #141b1d; --surface-2: #192024; --outline: #212b30;
+    --outline-soft: #1a2226; --text: #aebcc4; --text-strong: #dbe2e6; --muted: #6f818a;
+    --primary: #9dd2c0; --secondary: #e8b8a8; --blue: #a7cce1; --amber: #f0c896;
+    --code-bg: #0a0e0f; --shadow: 0 1px 0 rgba(0,0,0,.4), 0 8px 30px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"] {
+    --bg: #e8eff2; --surface: #f4f8fa; --surface-2: #dfe8ec; --outline: #c2cfd6;
+    --outline-soft: #d3dde1; --text: #435860; --text-strong: #26363c; --muted: #738a92;
+    --primary: #3f8f78; --secondary: #c07a58; --blue: #4f88a6; --amber: #a97b32;
+    --code-bg: #dde7eb; --shadow: 0 1px 0 rgba(255,255,255,.5), 0 8px 26px rgba(60,80,90,.14);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: var(--sans); font-size: 16px; line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 22px 120px; }
+
+  /* Header */
+  header.hero { padding: 62px 0 30px; border-bottom: 1px solid var(--outline); }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .22em;
+    text-transform: uppercase; color: var(--primary); margin: 0 0 14px;
+  }
+  h1 {
+    font-size: clamp(2.1rem, 5vw, 3.1rem); line-height: 1.04; margin: 0 0 16px;
+    color: var(--text-strong); font-weight: 700; letter-spacing: -.02em; text-wrap: balance;
+  }
+  h1 .v { color: var(--primary); }
+  .lede { max-width: 62ch; font-size: 1.06rem; color: var(--text); margin: 0 0 4px; }
+  .lede b { color: var(--text-strong); font-weight: 600; }
+
+  /* Sticky nav */
+  nav.toc {
+    position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(8px); border-bottom: 1px solid var(--outline);
+    margin: 0 0 44px; padding: 11px 0;
+  }
+  nav.toc .row { display: flex; flex-wrap: wrap; gap: 7px; }
+  nav.toc a {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .02em;
+    color: var(--muted); text-decoration: none; padding: 4px 10px; border-radius: 999px;
+    border: 1px solid transparent; white-space: nowrap; transition: color .15s, border-color .15s, background .15s;
+  }
+  nav.toc a:hover, nav.toc a:focus-visible { color: var(--primary); border-color: var(--outline); background: var(--surface); outline: none; }
+
+  section { margin: 0 0 54px; scroll-margin-top: 66px; }
+  h2 {
+    font-size: 1.5rem; color: var(--text-strong); margin: 0 0 6px; letter-spacing: -.01em;
+    display: flex; align-items: baseline; gap: 12px; font-weight: 680;
+  }
+  h2 .num {
+    font-family: var(--mono); font-size: .82rem; color: var(--primary);
+    border: 1px solid var(--outline); border-radius: 7px; padding: 2px 8px; font-weight: 500;
+  }
+  .sub { color: var(--muted); margin: 0 0 22px; max-width: 68ch; font-size: .98rem; }
+  h3 {
+    font-family: var(--mono); font-size: .78rem; text-transform: uppercase; letter-spacing: .16em;
+    color: var(--secondary); margin: 30px 0 12px; font-weight: 600;
+  }
+
+  p { max-width: 72ch; }
+  a { color: var(--primary); text-decoration-color: var(--outline); text-underline-offset: 3px; }
+
+  code {
+    font-family: var(--mono); font-size: .85em; background: var(--code-bg);
+    border: 1px solid var(--outline-soft); padding: .08em .38em; border-radius: 5px; color: var(--text-strong);
+    white-space: nowrap;
+  }
+  .kw { color: var(--primary); }
+  pre {
+    background: var(--code-bg); border: 1px solid var(--outline); border-radius: var(--radius);
+    padding: 16px 18px; overflow-x: auto; margin: 14px 0; box-shadow: var(--shadow);
+  }
+  pre code { background: none; border: none; padding: 0; white-space: pre; font-size: .84rem; line-height: 1.65; color: var(--text); }
+  .c-key { color: var(--primary); }
+  .c-str { color: var(--secondary); }
+  .c-cmt { color: var(--muted); font-style: italic; }
+  .c-sec { color: var(--blue); }
+
+  /* Cards */
+  .card {
+    background: var(--surface); border: 1px solid var(--outline); border-radius: var(--radius);
+    padding: 20px 22px; box-shadow: var(--shadow);
+  }
+  .grid { display: grid; gap: 16px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 720px) { .g2, .g3 { grid-template-columns: 1fr; } }
+
+  /* Tables */
+  .tbl-wrap { overflow-x: auto; border: 1px solid var(--outline); border-radius: var(--radius); margin: 14px 0; box-shadow: var(--shadow); }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+  th, td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--outline-soft); vertical-align: top; }
+  th {
+    font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .1em;
+    color: var(--muted); background: var(--surface-2); position: sticky; top: 0; font-weight: 600;
+  }
+  tr:last-child td { border-bottom: none; }
+  td:first-child code { white-space: nowrap; }
+  table code { font-size: .82rem; }
+  .dim { color: var(--muted); }
+  .def { font-family: var(--mono); font-size: .8rem; color: var(--secondary); white-space: nowrap; }
+
+  /* Callout */
+  .note {
+    border-left: 3px solid var(--primary); background: var(--surface);
+    border-radius: 0 var(--radius) var(--radius) 0; padding: 15px 20px; margin: 18px 0;
+  }
+  .note.machine { border-left-color: var(--blue); }
+  .note.warn { border-left-color: var(--amber); }
+  .note h4 {
+    margin: 0 0 6px; font-family: var(--mono); font-size: .74rem; text-transform: uppercase;
+    letter-spacing: .14em; color: var(--text-strong);
+  }
+  .note p { margin: 6px 0 0; font-size: .93rem; }
+  .note ul { margin: 8px 0 0; padding-left: 18px; }
+  .note li { margin: 3px 0; font-size: .93rem; }
+
+  ul.tight { padding-left: 20px; }
+  ul.tight li { margin: 5px 0; max-width: 72ch; }
+
+  .pill {
+    display: inline-block; font-family: var(--mono); font-size: .74rem; padding: 2px 9px;
+    border-radius: 999px; border: 1px solid var(--outline); color: var(--text); background: var(--surface-2);
+  }
+  .pill.ok { color: var(--primary); border-color: color-mix(in srgb, var(--primary) 40%, var(--outline)); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+
+  footer { border-top: 1px solid var(--outline); padding-top: 22px; color: var(--muted); font-size: .85rem; }
+  footer code { font-size: .8rem; }
+  .lead-in { color: var(--text-strong); font-weight: 600; }
+  hr.soft { border: none; border-top: 1px solid var(--outline-soft); margin: 26px 0; }
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Desktop shell · migrated from v4 · 2026-07-11</p>
+    <h1>Noctalia <span class="v">v5</span> field reference</h1>
+    <p class="lede">Everything the v5 docs cover, distilled for <b>this machine</b> — Hyprland (Lua-native) on CachyOS, RTX 5060. Config is now <b>TOML</b>, the binary is <code>noctalia</code>, and IPC is <code>noctalia&nbsp;msg</code>. Themed in your own <b>Peche</b> palette.</p>
+  </header>
+
+  <nav class="toc" aria-label="Sections">
+    <div class="row">
+      <a href="#config">Config model</a>
+      <a href="#theme">Theme &amp; palette</a>
+      <a href="#bar">Bar</a>
+      <a href="#widgets">Widgets</a>
+      <a href="#dock">Dock</a>
+      <a href="#cc">Control center</a>
+      <a href="#wall">Wallpaper</a>
+      <a href="#desk">Desktop widgets</a>
+      <a href="#services">Services</a>
+      <a href="#ipc">IPC cheat-sheet</a>
+      <a href="#templates">App theming</a>
+      <a href="#plugins">Plugins</a>
+      <a href="#hypr">Hyprland</a>
+    </div>
+  </nav>
+
+  <!-- CONFIG -->
+  <section id="config">
+    <h2><span class="num">01</span> How config works</h2>
+    <p class="sub">The one mental model that explains every "why is my setting ignored?" — two files, and the GUI always wins.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin-top:0">Your layer — hand-edited</h3>
+        <p style="margin:0"><code>~/.config/noctalia/*.toml</code></p>
+        <p class="dim" style="font-size:.9rem">Every <code>*.toml</code> here is read (alphabetical merge), non-recursive. Split freely: <code>bar.toml</code>, <code>theme.toml</code>… Recommended for dotfiles.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">GUI layer — app-managed <span class="pill ok">wins</span></h3>
+        <p style="margin:0"><code>~/.local/state/noctalia/settings.toml</code></p>
+        <p class="dim" style="font-size:.9rem">Written by the Settings UI, setup wizard, and IPC. <b>Loads last</b>, so it overrides your hand-edited files key-for-key.</p>
+      </div>
+    </div>
+
+    <h3>Load order (last wins)</h3>
+    <ul class="tight">
+      <li>Built-in defaults</li>
+      <li>Your <code>~/.config/noctalia/*.toml</code> — each file's <code>[include]</code> contents first, then its own keys</li>
+      <li>GUI overrides <code>settings.toml</code> — <span class="lead-in">this is why a hand-edited key can look ignored.</span> Inspect that file if a setting won't stick.</li>
+    </ul>
+
+    <h3>Splitting &amp; includes</h3>
+    <pre><code><span class="c-sec">[include]</span>
+<span class="c-key">files</span> = [
+  <span class="c-str">"widgets/"</span>,                   <span class="c-cmt"># every *.toml in dir, sorted</span>
+  <span class="c-str">"bars/top.toml"</span>,             <span class="c-cmt"># single file</span>
+  <span class="c-str">"~/.config/shared/base.toml"</span> <span class="c-cmt"># ~, $VAR expanded</span>
+]
+<span class="c-cmt"># autoload = false  → load ONLY this file (profile switching)</span></code></pre>
+    <p class="dim" style="font-size:.9rem">Includes merge as a base; the including file's own keys win. <code>[include]</code> is honored in your files only — never in <code>settings.toml</code>.</p>
+
+    <h3>CLI</h3>
+    <div class="tbl-wrap"><table>
+      <tr><th>Command</th><th>Does</th></tr>
+      <tr><td><code>noctalia config export</code></td><td>Merged <em>user</em> config → stdout (use this for dotfiles)</td></tr>
+      <tr><td><code>noctalia config export full</code></td><td>Full effective config incl. every default — the real schema</td></tr>
+      <tr><td><code>noctalia config validate</code></td><td>TOML syntax + unknown/obsolete keys + bad enums</td></tr>
+      <tr><td><code>noctalia msg config-reload</code></td><td>Reload the stack now (both layers also hot-reload automatically)</td></tr>
+    </table></div>
+
+    <div class="note machine">
+      <h4>On your machine</h4>
+      <p>Right now v5 runs purely from <code>settings.toml</code> (the setup wizard wrote defaults). <code>~/.config/noctalia/</code> is empty. To version-control your setup in <a href="#">dotfiles</a>, build it there as <code>*.toml</code> and let it be the base layer.</p>
+    </div>
+  </section>
+
+  <!-- THEME -->
+  <section id="theme">
+    <h2><span class="num">02</span> Theme &amp; palette</h2>
+    <p class="sub">The <code>[theme]</code> table picks a mode and a color source. Custom palettes use the <b>same JSON format as v4</b> — Peche drops straight in.</p>
+
+    <pre><code><span class="c-sec">[theme]</span>
+<span class="c-key">mode</span>              = <span class="c-str">"dark"</span>        <span class="c-cmt"># dark | light | auto (auto follows [location] sun times)</span>
+<span class="c-key">source</span>            = <span class="c-str">"custom"</span>      <span class="c-cmt"># builtin | wallpaper | community | custom</span>
+<span class="c-key">custom_palette</span>    = <span class="c-str">"Peche"</span>       <span class="c-cmt"># filename WITHOUT .json in palettes/</span>
+<span class="c-key">builtin</span>           = <span class="c-str">"Noctalia"</span>    <span class="c-cmt"># when source = builtin</span>
+<span class="c-key">community_palette</span> = <span class="c-str">"Oxocarbon"</span>   <span class="c-cmt"># when source = community</span>
+<span class="c-key">wallpaper_scheme</span>  = <span class="c-str">"m3-content"</span>  <span class="c-cmt"># when source = wallpaper</span></code></pre>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin-top:0">Recreate Peche</h3>
+        <ol class="tight" style="margin:0">
+          <li>Copy your scheme to <code>~/.config/noctalia/palettes/Peche.json</code></li>
+          <li>Set <code>source="custom"</code>, <code>custom_palette="Peche"</code></li>
+          <li>Or live: <code>noctalia msg color-scheme-set custom Peche</code></li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Palette JSON shape</h3>
+        <p class="dim" style="font-size:.88rem;margin:0">Top-level <code>"dark"</code> + optional <code>"light"</code>. 16 role keys each (<code>mPrimary</code>, <code>mSurface</code>, <code>mOutline</code>, <code>mHover</code>…) plus a <code>terminal</code> object (<code>normal</code>/<code>bright</code> ANSI + fg/bg/cursor/selection). Hex <code>#RGB</code>…<code>#RRGGBBAA</code>.</p>
+      </div>
+    </div>
+
+    <h3>Builtins</h3>
+    <div class="chips">
+      <span class="pill">Ayu</span><span class="pill">Catppuccin</span><span class="pill">Dracula</span><span class="pill">Eldritch</span><span class="pill">Gruvbox</span><span class="pill">Kanagawa</span><span class="pill">Noctalia</span><span class="pill">Nord</span><span class="pill">Rosé Pine</span><span class="pill">Tokyo-Night</span>
+    </div>
+    <h3>Wallpaper generators <span class="dim" style="text-transform:none;letter-spacing:0">(source = wallpaper)</span></h3>
+    <div class="chips">
+      <span class="pill">m3-tonal-spot</span><span class="pill">m3-content</span><span class="pill">m3-fruit-salad</span><span class="pill">m3-rainbow</span><span class="pill">m3-monochrome</span><span class="pill">vibrant</span><span class="pill">faithful</span><span class="pill">soft</span><span class="pill">muted</span>
+    </div>
+  </section>
+
+  <!-- BAR -->
+  <section id="bar">
+    <h2><span class="num">03</span> Bar</h2>
+    <p class="sub">Bars are named tables under <code>[bar.&lt;name&gt;]</code>. Each spawns on every monitor; per-monitor overrides refine it. Widgets go in three lanes: <code>start</code> / <code>center</code> / <code>end</code>.</p>
+
+    <pre><code><span class="c-sec">[bar.default]</span>
+<span class="c-key">position</span>   = <span class="c-str">"top"</span>         <span class="c-cmt"># top | bottom | left | right</span>
+<span class="c-key">thickness</span>  = <span class="c-str">34</span>
+<span class="c-key">background_opacity</span> = <span class="c-str">0.35</span>
+<span class="c-key">border</span>     = <span class="c-str">"outline"</span>     <span class="c-cmt"># role or #RRGGBB</span>
+<span class="c-key">margin_edge</span> = <span class="c-str">2</span>            <span class="c-cmt"># &gt;0 floats the bar (your old "floating" look)</span>
+<span class="c-key">radius</span>     = <span class="c-str">12</span>
+<span class="c-key">scale</span>      = <span class="c-str">1.0</span>          <span class="c-cmt"># bar content scale (fonts/icons)</span>
+<span class="c-key">start</span>  = [<span class="c-str">"launcher"</span>, <span class="c-str">"workspaces"</span>, <span class="c-str">"active_window"</span>]
+<span class="c-key">center</span> = [<span class="c-str">"media"</span>, <span class="c-str">"clock"</span>, <span class="c-str">"sysmon"</span>]
+<span class="c-key">end</span>    = [<span class="c-str">"tray"</span>, <span class="c-str">"notifications"</span>, <span class="c-str">"volume"</span>, <span class="c-str">"brightness"</span>, <span class="c-str">"control-center"</span>, <span class="c-str">"session"</span>]
+
+<span class="c-sec">[bar.default.monitor."DP-1"]</span>    <span class="c-cmt"># per-monitor override; first match wins</span>
+<span class="c-key">position</span> = <span class="c-str">"top"</span>            <span class="c-cmt"># match by connector OR description substring</span>
+<span class="c-cmt"># enabled = false  → remove this bar from that output</span></code></pre>
+
+    <div class="tbl-wrap"><table>
+      <tr><th>Key</th><th>Default</th><th>Notes</th></tr>
+      <tr><td><code>auto_hide</code></td><td class="def">false</td><td>Slide out on pointer leave; edge reveal</td></tr>
+      <tr><td><code>layer</code></td><td class="def">top</td><td><code>overlay</code> = shows above fullscreen</td></tr>
+      <tr><td><code>reserve_space</code></td><td class="def">true</td><td>Compositor exclusive zone</td></tr>
+      <tr><td><code>margin_ends</code></td><td class="def">100</td><td>Inset from each end of the main axis</td></tr>
+      <tr><td><code>radius_top_left…</code></td><td class="def">12</td><td>Per-corner; <b>negative = concave spike</b> (inner corners only)</td></tr>
+      <tr><td><code>capsule</code></td><td class="def">false</td><td>Pill background behind widgets; <code>capsule_fill</code>, <code>capsule_opacity</code>…</td></tr>
+      <tr><td><code>font_weight</code></td><td class="def">regular</td><td><code>regular</code> | <code>bold</code>; <code>font_family</code> empty = inherit global</td></tr>
+      <tr><td><code>dead_zone</code></td><td class="def">—</td><td>Sub-table: click/scroll actions on empty bar margin</td></tr>
+    </table></div>
+  </section>
+
+  <!-- WIDGETS -->
+  <section id="widgets">
+    <h2><span class="num">04</span> Bar widgets</h2>
+    <p class="sub">A lane entry is a widget name. Define <code>[widget.&lt;name&gt;]</code> with a <code>type</code> to configure it (or to run two of the same kind); a bare name with no table just uses that name as the type with defaults.</p>
+
+    <pre><code><span class="c-sec">[widget.clock]</span>
+<span class="c-key">type</span>   = <span class="c-str">"clock"</span>
+<span class="c-key">format</span> = <span class="c-str">"{:%H:%M  %a, %d %b}"</span>   <span class="c-cmt"># strftime tokens; \n for two lines</span>
+
+<span class="c-sec">[widget.sysmon]</span>              <span class="c-cmt"># one instance per stat — add several</span>
+<span class="c-key">type</span> = <span class="c-str">"sysmon"</span>
+<span class="c-key">stat</span> = <span class="c-str">"cpu_temp"</span>            <span class="c-cmt"># see stat table below</span></code></pre>
+
+    <h3>Available widget types</h3>
+    <div class="chips">
+      <span class="pill">clock</span><span class="pill">spacer</span><span class="pill">workspaces</span><span class="pill">taskbar</span><span class="pill">active_window</span><span class="pill">control-center</span><span class="pill">sysmon</span><span class="pill">volume</span><span class="pill">audio_visualizer</span><span class="pill">media</span><span class="pill">privacy</span><span class="pill">battery</span><span class="pill">brightness</span><span class="pill">bluetooth</span><span class="pill">network</span><span class="pill">keyboard_layout</span><span class="pill">lock_keys</span><span class="pill">launcher</span><span class="pill">custom_button</span><span class="pill">clipboard</span><span class="pill">screenshot</span><span class="pill">weather</span><span class="pill">notifications</span><span class="pill">tray</span><span class="pill">power_profile</span><span class="pill">caffeine</span><span class="pill">nightlight</span><span class="pill">theme_mode</span><span class="pill">settings</span><span class="pill">session</span><span class="pill">wallpaper</span>
+    </div>
+    <p class="dim" style="font-size:.9rem">Plugin widgets: <code>type = "&lt;author&gt;/&lt;plugin&gt;:&lt;entry&gt;"</code>.</p>
+
+    <h3>sysmon stats <span class="dim" style="text-transform:none;letter-spacing:0">— <code>stat</code> key</span></h3>
+    <div class="tbl-wrap"><table>
+      <tr><th>stat</th><th>Shows</th><th>stat</th><th>Shows</th></tr>
+      <tr><td><code>cpu_usage</code></td><td>CPU %</td><td><code>ram_used</code> / <code>ram_pct</code></td><td>RAM used / %</td></tr>
+      <tr><td><code>cpu_temp</code></td><td>CPU °C</td><td><code>swap_pct</code></td><td>Swap %</td></tr>
+      <tr><td><code>gpu_temp</code></td><td>GPU °C <span class="pill">NVML</span></td><td><code>disk_pct</code></td><td>Disk % (<code>path</code>)</td></tr>
+      <tr><td><code>gpu_vram</code></td><td>VRAM % <span class="pill">NVML</span></td><td><code>net_rx</code> / <code>net_tx</code></td><td>Down / up rate</td></tr>
+    </table></div>
+    <div class="note machine">
+      <h4>RTX 5060 note</h4>
+      <p>GPU stats exist as <code>gpu_temp</code> and <code>gpu_vram</code>, both via the NVML fallback on your proprietary driver. There is <b>no</b> gpu-<em>usage</em>% stat. Sampling cadence is global under <code>[system.monitor]</code>, not per-widget.</p>
+    </div>
+  </section>
+
+  <!-- DOCK -->
+  <section id="dock">
+    <h2><span class="num">05</span> Dock</h2>
+    <p class="sub">A standalone app dock — <b>disabled by default</b>. Pinned apps match by desktop-entry stem, then WM class, then name.</p>
+    <pre><code><span class="c-sec">[dock]</span>
+<span class="c-key">enabled</span>  = <span class="c-str">true</span>
+<span class="c-key">position</span> = <span class="c-str">"bottom"</span>
+<span class="c-key">monitors</span> = [<span class="c-str">"HDMI-A-1"</span>, <span class="c-str">"DP-1"</span>]   <span class="c-cmt"># empty = all outputs</span>
+<span class="c-key">pinned</span>   = [<span class="c-str">"firefox"</span>, <span class="c-str">"kitty"</span>, <span class="c-str">"org.kde.dolphin"</span>, <span class="c-str">"vivaldi-stable"</span>]
+<span class="c-key">auto_hide</span> = <span class="c-str">false</span>
+<span class="c-key">launcher_position</span> = <span class="c-str">"none"</span>          <span class="c-cmt"># none | start | end</span>
+<span class="c-key">magnification</span> = <span class="c-str">true</span>               <span class="c-cmt"># macOS-style pointer magnify</span>
+<span class="c-key">show_running</span> = <span class="c-str">true</span></code></pre>
+    <p class="dim" style="font-size:.9rem">Other keys: <code>icon_size</code> (48), <code>background_opacity</code> (0.88), <code>show_dots</code>, <code>show_instance_count</code>, <code>active_scale</code>/<code>inactive_scale</code>, <code>radius</code>, <code>margin_edge</code>, <code>reserve_space</code>.</p>
+  </section>
+
+  <!-- CONTROL CENTER -->
+  <section id="cc">
+    <h2><span class="num">06</span> Control center</h2>
+    <p class="sub"><code>[control_center]</code> — sidebar dashboard. Home shows up to 6 shortcut buttons.</p>
+    <pre><code><span class="c-sec">[control_center]</span>
+<span class="c-key">sidebar</span> = <span class="c-str">"compact"</span>   <span class="c-cmt"># full | compact | none</span>
+<span class="c-key">width</span>   = <span class="c-str">680</span>
+
+<span class="c-sec">[[control_center.shortcuts]]</span>
+<span class="c-key">type</span> = <span class="c-str">"wifi"</span>
+<span class="c-sec">[[control_center.shortcuts]]</span>
+<span class="c-key">type</span> = <span class="c-str">"bluetooth"</span></code></pre>
+    <h3>Shortcut types</h3>
+    <div class="chips">
+      <span class="pill">wifi</span><span class="pill">bluetooth</span><span class="pill">nightlight</span><span class="pill">notification <span class="dim">(DND)</span></span><span class="pill">dark_mode</span><span class="pill">caffeine</span><span class="pill">audio</span><span class="pill">mic_mute</span><span class="pill">power_profile</span><span class="pill">media</span><span class="pill">weather</span><span class="pill">system</span><span class="pill">screen_time</span><span class="pill">keyboard_layout</span><span class="pill">wallpaper</span><span class="pill">session</span><span class="pill">clipboard</span>
+    </div>
+    <p class="dim" style="font-size:.9rem">Tab context ids (for <code>panel-toggle control-center &lt;tab&gt;</code>): <code>home</code>, <code>media</code>, <code>audio</code>, <code>monitor</code>, <code>system</code>, <code>network</code>, <code>bluetooth</code>, <code>weather</code>, <code>calendar</code>, <code>notifications</code>, <code>power</code>.</p>
+  </section>
+
+  <!-- WALLPAPER -->
+  <section id="wall">
+    <h2><span class="num">07</span> Wallpaper &amp; backdrop</h2>
+    <p class="sub"><code>[wallpaper]</code> — global dirs shared across monitors unless per-monitor is on. <code>[backdrop]</code> is the blurred copy for compositor overview modes.</p>
+    <div class="tbl-wrap"><table>
+      <tr><th>Key</th><th>Default</th><th>Notes</th></tr>
+      <tr><td><code>enabled</code></td><td class="def">true</td><td>Set <code>false</code> to run bar-only (your old perf setting)</td></tr>
+      <tr><td><code>directory</code></td><td class="def">—</td><td>Folder the picker browses; <code>directory_light</code>/<code>_dark</code> per mode</td></tr>
+      <tr><td><code>fill_mode</code></td><td class="def">crop</td><td>center · crop · fit · stretch · repeat · <code>span</code> (across monitors)</td></tr>
+      <tr><td><code>transition</code></td><td class="def">all</td><td>Random from <code>["fade","wipe","disc","stripes","zoom","honeycomb"]</code></td></tr>
+      <tr><td><code>per_monitor_directories</code></td><td class="def">false</td><td>Enables <code>[wallpaper.monitor.&lt;name&gt;]</code> overrides</td></tr>
+    </table></div>
+    <pre><code><span class="c-sec">[wallpaper.automation]</span>
+<span class="c-key">enabled</span> = <span class="c-str">true</span>
+<span class="c-key">interval_seconds</span> = <span class="c-str">1800</span>
+<span class="c-key">order</span> = <span class="c-str">"random"</span>       <span class="c-cmt"># random | alphabetical</span>
+<span class="c-key">recursive</span> = <span class="c-str">true</span></code></pre>
+  </section>
+
+  <!-- DESKTOP WIDGETS -->
+  <section id="desk">
+    <h2><span class="num">08</span> Desktop widgets</h2>
+    <p class="sub">Free-floating surfaces placed by pixel coordinate per output. Best built with the <b>visual editor</b>, then exported to TOML.</p>
+    <pre><code><span class="c-sec">[desktop_widgets.widget.clock_main]</span>
+<span class="c-key">type</span>   = <span class="c-str">"clock"</span>       <span class="c-cmt"># button clock label sysmon weather media_player sticker</span>
+<span class="c-key">output</span> = <span class="c-str">"DP-1"</span>
+<span class="c-key">cx</span> = <span class="c-str">1200</span>            <span class="c-cmt"># center X/Y in logical px</span>
+<span class="c-key">cy</span> = <span class="c-str">280</span>
+<span class="c-sec">[desktop_widgets.widget.clock_main.settings]</span>
+<span class="c-key">clock_style</span> = <span class="c-str">"digital"</span>
+<span class="c-key">format</span> = <span class="c-str">"{:%H:%M}"</span></code></pre>
+    <div class="note">
+      <h4>Editor</h4>
+      <p><code>noctalia msg desktop-widgets-toggle-edit</code> — drag = move, ring = rotate, corner = resize, <code>G</code> = snap grid, <code>Delete</code> = remove. Also <code>fancy_audio_visualizer</code>, <code>audio_visualizer</code>. Then Settings → Export → Merged User Config to promote to declarative TOML.</p>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <h2><span class="num">09</span> Services</h2>
+    <p class="sub">Each is its own top-level table. All small; the essentials:</p>
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin-top:0">[weather]</h3>
+        <p style="margin:0;font-size:.9rem"><code>enabled</code>, <code>unit</code> (<code>metric</code>/<code>imperial</code>), <code>refresh_minutes</code> (30). <b>Needs <code>[location]</code></b> (set <code>auto_locate</code> or <code>address</code>). Open-Meteo, 6-day forecast.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">[notification]</h3>
+        <p style="margin:0;font-size:.9rem"><code>enable_daemon</code>, <code>position</code> (top_right…), <code>layer</code>, <code>scale</code>, <code>monitors</code>, <code>offset_x/y</code>. Filters: <code>[notification.filter.&lt;name&gt;]</code>. DND is IPC-only.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">[brightness]</h3>
+        <p style="margin:0;font-size:.9rem"><code>enable_ddcutil</code> for external DDC/CI, <code>minimum_brightness</code>, <code>sync_all_monitors</code>. Per-display: <code>[brightness.monitor.&lt;name&gt;]</code> <code>backend</code> = auto/backlight/ddcutil/none.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">[nightlight]</h3>
+        <p style="margin:0;font-size:.9rem"><code>enabled</code>, <code>temperature_day</code> (6500), <code>temperature_night</code> (4000), <code>force</code>. Schedule derived from <code>[location]</code> sun times.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">[audio]</h3>
+        <p style="margin:0;font-size:.9rem"><code>enable_overdrive</code> (→150%), <code>enable_sounds</code>, <code>sound_volume</code>, custom <code>volume_change_sound</code> / <code>notification_sound</code>.</p>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">[idle] + [idle.behavior.*]</h3>
+        <p style="margin:0;font-size:.9rem">Actions <code>lock</code> / <code>screen_off</code> / <code>suspend</code> / <code>lock_and_suspend</code> / <code>command</code>, each with <code>timeout</code>. <code>pre_action_fade_seconds</code> dims first.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IPC -->
+  <section id="ipc">
+    <h2><span class="num">10</span> IPC cheat-sheet</h2>
+    <p class="sub"><code>noctalia msg &lt;command&gt;</code> from a keybind, script, or hook. In config fields (idle/hooks) use the <code>noctalia:&lt;command&gt;</code> shorthand. Full list: <code>noctalia msg --help</code>.</p>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="margin-top:0">Panels &amp; surfaces</h3>
+        <pre style="margin:0"><code>panel-toggle launcher [query]
+panel-toggle launcher /emo
+panel-toggle control-center [tab]
+panel-toggle session
+panel-toggle clipboard
+panel-toggle wallpaper
+bar-toggle [name] [monitor]
+dock-toggle
+settings-toggle [context]
+window-switcher</code></pre>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">System controls</h3>
+        <pre style="margin:0"><code>volume-up | volume-down | volume-mute
+volume-set 65%
+mic-mute
+brightness-up | brightness-down
+brightness-set DP-1 0.65
+nightlight-toggle
+wifi-toggle | bluetooth-toggle
+caffeine-toggle
+power-cycle | power-set balanced
+dpms-off | dpms-on</code></pre>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Media &amp; theme</h3>
+        <pre style="margin:0"><code>media toggle | next | previous | stop
+theme-mode-toggle
+theme-mode-set dark|light|auto
+color-scheme-set custom Peche
+color-scheme-set wallpaper m3-content
+templates-apply
+wallpaper-next | wallpaper-random
+wallpaper-set ~/pics/x.png</code></pre>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Session &amp; shell</h3>
+        <pre style="margin:0"><code>session lock | suspend | logout
+session reboot | shutdown
+status
+config-reload
+notification-dnd-toggle
+notification-show "Done" "Tests pass"
+screenshot-region
+screenshot-fullscreen [pick|all]</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPLATES -->
+  <section id="templates">
+    <h2><span class="num">11</span> App theming (templates)</h2>
+    <p class="sub">Noctalia writes your palette into other apps' config on every theme change. Opt in by id under <code>[theme.templates]</code>.</p>
+    <pre><code><span class="c-sec">[theme.templates]</span>
+<span class="c-key">enable_builtin_templates</span>   = <span class="c-str">true</span>
+<span class="c-key">builtin_ids</span> = [<span class="c-str">"kitty"</span>, <span class="c-str">"gtk3"</span>, <span class="c-str">"gtk4"</span>, <span class="c-str">"qt"</span>, <span class="c-str">"kcolorscheme"</span>, <span class="c-str">"btop"</span>]
+<span class="c-key">enable_community_templates</span> = <span class="c-str">true</span>
+<span class="c-key">community_ids</span> = [<span class="c-str">"zen-browser"</span>, <span class="c-str">"pywalfox"</span>]</code></pre>
+    <div class="note">
+      <h4>Your old v4 templates — all present in v5</h4>
+      <p><b>Built-in:</b> kitty · gtk3 · gtk4 · qt · kcolorscheme · btop · alacritty · foot · ghostty · starship · hyprland · emacs. <b>Community:</b> zen-browser · pywalfox · vscode · neovim · discord · spicetify · rofi · fuzzel. List live with <code>noctalia theme --list-templates</code>.</p>
+    </div>
+    <p class="dim" style="font-size:.9rem">User templates: <code>[theme.templates.user.&lt;id&gt;]</code> with <code>input_path</code>, <code>output_path</code>, <code>post_hook</code>. Engine has 48 Material tokens + terminal colors, filters, and loops.</p>
+  </section>
+
+  <!-- PLUGINS -->
+  <section id="plugins">
+    <h2><span class="num">12</span> Plugins</h2>
+    <p class="sub">Directories with a <code>plugin.toml</code> + Luau scripts. Two default git sources; "installed ≠ enabled".</p>
+    <pre><code>noctalia msg plugins list
+noctalia msg plugins enable  noctalia/screen_recorder
+noctalia msg plugins disable noctalia/screen_recorder
+noctalia msg plugins update  official
+noctalia msg plugins source add my-dev path ~/dev/my-plugins</code></pre>
+    <p class="dim" style="font-size:.9rem">Sources: <b>official</b> <code>noctalia-dev/official-plugins</code>, <b>community</b> <code>noctalia-dev/community-plugins</code>. Send an event: <code>noctalia msg plugin &lt;author/plugin:entry&gt; &lt;target&gt; &lt;event&gt;</code>. Declare in config under <code>[plugins]</code> / <code>[[plugins.source]]</code>.</p>
+  </section>
+
+  <!-- HYPRLAND -->
+  <section id="hypr">
+    <h2><span class="num">13</span> Hyprland integration</h2>
+    <p class="sub">What the docs recommend for the best experience — matched to your Lua-native config (<code>~/.config/hypr/hyprland.lua</code>). Window class is <code>dev.noctalia.Noctalia</code>.</p>
+    <pre><code><span class="c-cmt">-- autostart</span>
+hl.on(<span class="c-str">"hyprland.start"</span>, <span class="kw">function</span>() hl.exec_cmd(<span class="c-str">"noctalia"</span>) <span class="kw">end</span>)
+
+<span class="c-cmt">-- blur + no-fight anims on Noctalia surfaces</span>
+hl.layer_rule({
+  name = <span class="c-str">"noctalia"</span>,
+  match = { namespace = <span class="c-str">"^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd)$"</span> },
+  no_anim = <span class="kw">true</span>, blur = <span class="kw">true</span>, blur_popups = <span class="kw">true</span>, ignore_alpha = <span class="c-str">0.5</span>,
+})
+
+<span class="c-cmt">-- float the settings window</span>
+hl.window_rule({ match = { class = <span class="c-str">"dev.noctalia.Noctalia"</span> }, float = <span class="kw">true</span>, size = { 1080, 920 } })</code></pre>
+    <p class="dim" style="font-size:.9rem">Your <code>autostart.lua</code> and <code>keybinds.lua</code> are already migrated to these forms. The docs make no mention of uwsm for Noctalia itself.</p>
+  </section>
+
+  <footer>
+    <p>Compiled from <code>docs.noctalia.dev/v5</code> (all ~30 pages) + <code>noctalia config export full</code> on this machine · Noctalia v5.0.0. Palette: <b>Peche</b>. When in doubt, the running binary is authoritative — <code>noctalia msg --help</code> and <code>noctalia config export full</code>.</p>
+  </footer>
+</div>

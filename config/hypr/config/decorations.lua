@@ -1,4 +1,6 @@
 -- Look and feel configuration
+-- Border/group colors come from Noctalia (wallpaper palette): see noctalia.lua
+-- and the gradient override at the end of hyprland.lua.
 
 hl.config({
     general = {
@@ -7,29 +9,6 @@ hl.config({
         border_size = 2,
         extend_border_grab_area = 10,
         resize_on_border = true,
-        col = {
-            active_border = {
-                colors = { NCTL_PRIMARY, NCTL_SURFACE },
-                angle = 45,
-            },
-            inactive_border = NCTL_SURFACE,
-        },
-    },
-    group = {
-        col = {
-            border_active = NCTL_PRIMARY,
-            border_inactive = NCTL_SURFACE,
-            border_locked_active = NCTL_SECONDARY,
-            border_locked_inactive = NCTL_SURFACE_VARIANT,
-        },
-        groupbar = {
-            col = {
-                active = NCTL_PRIMARY,
-                inactive = NCTL_SURFACE,
-                locked_active = NCTL_SECONDARY,
-                locked_inactive = NCTL_SURFACE_VARIANT,
-            },
-        },
     },
     decoration = {
         dim_special = 0.3,

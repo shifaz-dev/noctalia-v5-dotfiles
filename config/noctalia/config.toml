@@ -240,3 +240,14 @@ empty_color = "on_surface"
 focused_color = "error"
 focused_output_only = true
 max_label_chars = 5
+
+[idle]
+pre_action_fade_seconds = 2.0
+
+    [idle.behavior.lock]
+    action = "lock"
+    timeout = 600
+
+    [idle.behavior.screen_off]
+    action = "screen_off"
+    timeout = 900

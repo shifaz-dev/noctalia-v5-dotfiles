@@ -53,6 +53,12 @@ hl.window_rule({
     no_blur = true,
 })
 
+-- Video, calls, screen share and games: fully opaque (wallpaper showing through is distracting)
+hl.window_rule({
+    match   = { class = "^(firefox|floorp|one\\.ablaze\\.floorp|zoom|Zoom|discord|vesktop|mpv|steam_app.*|gamescope|.*\\.exe)$" },
+    opacity = "1.0 override 1.0 override",
+})
+
 -- Apps
 local primaryWorkspace = 1
 

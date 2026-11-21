@@ -6,5 +6,7 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("noctalia")
     hl.exec_cmd("xhost +SI:localuser:root")
     -- Mark the 2K monitor as primary in XWayland so games (eFootball etc.) pick it and offer 2560x1440
-    hl.exec_cmd("sh -c 'sleep 2; xrandr --output DP-1 --primary'")
+    -- Retry: XWayland may not be up yet, and a fixed sleep 2 wasn't enough
+    -- Connector is looked up by model (HKC E2721H) so it survives cable/port swaps
+    hl.exec_cmd("sh -c 'for i in $(seq 30); do O=$(hyprctl monitors -j 2>/dev/null | jq -r \".[] | select(.model==\\\"E2721H\\\") | .name\"); [ -n \"$O\" ] && xrandr --listmonitors 2>/dev/null | grep -q \"\\*$O\" && exit; [ -n \"$O\" ] && xrandr --output \"$O\" --primary 2>/dev/null; sleep 1; done'")
 end)
